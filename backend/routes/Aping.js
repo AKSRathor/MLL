@@ -5,8 +5,9 @@ const { ApiLogs } = require("../Models")
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 const JWT_SECRET = 'saltcode';
-
-
+var fetchuser = require("../middleware/fetchuser")
+// const axios = require('axios/dist/node/axios.cjs'); 
+var fetchapi = require("../middleware/fetchapi")
 
 
 router.post("/createKey", async (req, res) => {
@@ -18,6 +19,7 @@ router.post("/createKey", async (req, res) => {
 
     } catch (error) {
         res.status(500).send("Internal Server Error")
+        console.log(error.message)
     }
 
 })
@@ -65,6 +67,26 @@ router.get("/fetchLogs", async (req, res) => {
 
 })
 
+
+router.post("/fetchvahaan",fetchuser, fetchapi, async(req,res)=>{
+
+    try {
+        // fetch("localhost:5002/api/vahaan/fetchall", )
+
+        const response = await fetch(`http://localhost:3002/api/vahaan/fetchall`, {
+            method: 'POST'
+        })
+          const json = await response.json()
+        //   console.log(JSON.stringify(json))
+        // console.log(json)
+      
+        res.send({success:"API key fetch successfully", json})
+        
+    } catch (error) {
+        
+    }
+
+})
 
 
 module.exports = router
