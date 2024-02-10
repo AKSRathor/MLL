@@ -11,12 +11,14 @@ const port = 5000
 const driverRouter = require("./routes/Driver")
 const vehicleRouter = require("./routes/Vehicle")
 const userRouter = require("./routes/User")
-const apingRouter = require("./routes/Aping")
+const apingRouter = require("./routes/ApingVahaan")
+// const apingSaarthiRouter = require("./routes/ApingSaarthi")
 
 app.use("/driver", driverRouter)
 app.use("/user", userRouter)
 app.use("/vehicle", vehicleRouter)
 app.use("/aping", apingRouter)
+// app.use("/apingsaarthi", apingSaarthiRouter)
 
 
 db.sequelize.sync().then(()=>{

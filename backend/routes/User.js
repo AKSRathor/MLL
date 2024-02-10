@@ -36,16 +36,18 @@ router.post("/login", async (req, res) => {
         const { username, password } = req.body
         let user = await User.findOne({ where: { username: username } })
         const comparePassword = await bcrypt.compare(password, user.password)
-        console.log(user)
+        // console.log(user)
         if (!comparePassword) {
             success = false
             return res.status(400).json({ success, error: "Please try with correct password" })
         }
         const data = {
-            user: { id: user.id }
+            user: { username:username, password:password }
         }
+        // console.log("Your data is ", data.user)
         const authtoken = jwt.sign(data, JWT_SECRET)
         success = true
+        user.password = undefined
         res.send({ success, authtoken, id: data.user.id, user })
 
     } catch (error) {

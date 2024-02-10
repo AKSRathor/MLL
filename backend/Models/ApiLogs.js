@@ -4,7 +4,7 @@ module.exports = (Sequelize, DataTypes) => {
         key: {
             type: DataTypes.STRING,
             allowNull: false,
-            primaryKey: true,
+            // primaryKey: true,
         },
         ulip: {
             type: DataTypes.STRING,
