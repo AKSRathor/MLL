@@ -38,11 +38,11 @@ router.post("/createLog", async (req, res) => {
 })
 
 
-router.get("/fetchKeys", async (req, res) => {
+router.post("/fetchKeys",fetchuser, async (req, res) => {
     try {
 
         const {username} = req.body
-        let allKey = await ApiKeys.findOne({ where: { username } })
+        let allKey = await ApiKeys.findAll({ where: { username } })
         res.send({success:true, allKey})
         
     } catch (error) {
