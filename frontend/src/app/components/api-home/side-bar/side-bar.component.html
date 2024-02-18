@@ -1,4 +1,4 @@
-<div id="sideBarContent">
+<form id="sideBarContent" (ngSubmit)="handleOnCreateKey()">
     <button id="closeSideBar">
         X
     </button>
@@ -14,21 +14,21 @@
     <div id="allInputsSideBar">
         <div class="inputDivSidebar">
             <div class="inputDivSidePara"><p>Application Name</p></div>
-            <div class="inputDivSideInp"><input type="text" placeholder="Enter Application Name"></div>
+            <div class="inputDivSideInp"><input  [(ngModel)]="applicationName" name="applicationName" type="text" placeholder="Enter Application Name"></div>
         </div>
         <div class="inputDivSidebar">
-            <div class="inputDivSidePara"><p>Owner Name</p></div>
-            <div class="inputDivSideInp"><input type="text" placeholder="Enter Owner Name"></div>
+            <div class="inputDivSidePara" ><p>Owner Name</p></div>
+            <div class="inputDivSideInp"><input [(ngModel)]="ownerName" name="ownerName" type="text" placeholder="Enter Owner Name"></div>
         </div>
         <div class="inputDivSidebar">
-            <div class="inputDivSidePara"><p>Contact Name</p></div>
-            <div class="inputDivSideInp"><input type="text" placeholder="Enter Contact Name"></div>
+            <div class="inputDivSidePara" ><p>Contact Name</p></div>
+            <div class="inputDivSideInp"><input [(ngModel)]="contactName" name="contactName" type="text" placeholder="Enter Contact Name"></div>
         </div>
     </div>
     <div id="submitOptionKeyOuterDiv">
         <div id="submitOptionKey">
-            <button>Done</button>
+            <button class="redBtnEffect" type="submit">Done</button>
         </div>
 
     </div>
-</div>
+</form>

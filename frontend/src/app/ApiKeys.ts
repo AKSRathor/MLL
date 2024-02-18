@@ -3,5 +3,7 @@ export class ApiKeys{
     "ownerName":string
     "contactNo":string
     "applicationName":string
+    "secKey":string
+    "updatedAt":string
 
 }

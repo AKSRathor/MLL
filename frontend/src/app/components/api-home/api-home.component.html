@@ -1,4 +1,4 @@
-<app-side-bar></app-side-bar>
+<app-side-bar (keyCardAdd)="addKeyCard($event)"></app-side-bar>
     <div id="big_container">
         <div id="left_container">
             <img id="mahindra_logo" src="https://companieslogo.com/img/orig/MAHLOG.NS_BIG-b9ce0293.png?t=1604232065" alt="mahindta_logo">
@@ -12,7 +12,7 @@
         <div id="right_container">
             <div id="VYFc1qozkId5mra">
                 <div id="toggle_menu_div">
-                    <button id="toggle_menu">toggle menu</button>
+                    <button id="toggle_menu"><i class="fa-solid fa-bars"></i></button>
                 </div>
                 <div id="person_id_profile">person profile</div>
             </div>
@@ -23,7 +23,7 @@
     
                 </div>
                 <div id="button_div">
-                    <button id="N8NODaXdtouCuiJ"> + Create</button>
+                    <button id="N8NODaXdtouCuiJ" class="redBtnEffect"> + Create</button>
                 </div>
             </div>
 
@@ -37,6 +37,7 @@
                                 <th>Owner Name</th>
                                 <th>Contact Number</th>
                                 <th>Generated Passkey</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody *ngFor="let i of apiHome">
@@ -44,7 +45,13 @@
                                 <td>{{i.applicationName}}</td>
                                 <td>{{i.ownerName}}</td>
                                 <td>{{i.contactNo}}</td>
-                                <td>{{i.key}}</td>
+                                <td class="generatedApiPart" (click)="handleOnCopyClick(i.key)">
+                                    <div class="copyBtnDiv">
+                                        <p class="copyBtn">Click to copy</p>
+                                    </div>
+                                    <p class="keyVal">{{i.key.slice(0,20)}}...</p>
+                                </td>
+                                <td class="secKeyCreate"><button (click)="handleOnGenSecKey(i.key)"><i class="fa-solid fa-play"></i></button></td>
                             </tr>
                         </tbody>
                     </table>

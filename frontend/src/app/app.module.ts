@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -10,8 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from "@angular/common/http"
 import { NgxUiLoaderModule, NgxUiLoaderConfig } from "ngx-ui-loader";
-import { ApiHomeKeyrowComponent } from './components/api-home/api-home-keyrow/api-home-keyrow.component';
 import { SideBarComponent } from './components/api-home/side-bar/side-bar.component';
+
 
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
@@ -50,7 +49,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     LoginComponent,
     SignupComponent,
     ApiHomeComponent,
-    ApiHomeKeyrowComponent,
     SideBarComponent
   ],
   imports: [
