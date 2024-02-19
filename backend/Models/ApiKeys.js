@@ -21,6 +21,12 @@ module.exports = (Sequelize, DataTypes) => {
         username:{
             type:DataTypes.STRING,
             allowNull:false
+        },
+        secKey:{
+            type:DataTypes.STRING,
+        },
+        secValidity:{
+            type:DataTypes.DATE,
         }
         
         
