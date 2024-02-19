@@ -46,9 +46,7 @@ export class LoginComponent {
     
   }
   constructor(private http: HttpClient, private router:Router) { }
-  handleHoverSubmit() {
-    console.log("Hovering")
-  }
+ 
   
 
 

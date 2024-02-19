@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { ApiKeys } from 'src/app/ApiKeys';
+import { KeypageService } from 'src/app/services/keypage/keypage.service';
 
 
 
@@ -14,7 +16,9 @@ export class SideBarComponent {
   applicationName: string = "";
   ownerName: string = "";
   contactName: string = "";
-  constructor(private http: HttpClient, private router: Router) { }
+  sidebarVisible2: boolean = false;
+
+  constructor(private http: HttpClient, private router: Router, public keypage:KeypageService, private messageService: MessageService) { }
   @Output() keyCardAdd: EventEmitter<ApiKeys> = new EventEmitter();
 
   generateApiKey(length: number = 32): string {
@@ -25,9 +29,12 @@ export class SideBarComponent {
     }
     return apiKey;
   }
+  handleOnClickMenu(){
+    console.log("close clicked")
+    this.keypage.createKeyBool = false
+  }
   handleOnCreateKey() {
     const apiKey = self.crypto.randomUUID();
-
     const headers = new HttpHeaders({
       'auth-token': localStorage.getItem('authtoken') || '',
       'Content-Type': 'application/json' 
@@ -49,13 +56,16 @@ export class SideBarComponent {
           updatedAt:""
           
         }
+        this.messageService.add({ severity: 'success', summary: 'Key Created', detail:apiKey  })
         this.keyCardAdd.emit(todoCard)
         
       },
       error: error => {
         console.error("There is an error", error)
+        this.messageService.add({ severity: 'error', summary: 'Failed', detail:"Please check your server"  })
       }
     })
+    this.keypage.createKeyBool = false
 
   }
 

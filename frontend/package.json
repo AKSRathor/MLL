@@ -21,6 +21,7 @@
     "crockford-base32": "^2.0.0",
     "crypto-js": "^4.2.0",
     "ngx-ui-loader": "^13.0.0",
+    "primeng": "^17.7.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

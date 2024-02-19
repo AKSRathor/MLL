@@ -11,11 +11,18 @@ body, html {
 
 #left_container {
     width: 20%;
-    background-color: #F9FAFB; /* Example background color */
-    height: 100%;
+    background-color: #F9FAFB;
+    height: 100svh;
     display: inline-block;
-    overflow: auto;
+    position: sticky;
+    left: 0;
+    display: flex;
+    top: 0;
+    flex-direction: column;
+    gap: 21px;
 }
+
+
 
 #mahindra_logo {
     width: 80%;
@@ -25,18 +32,41 @@ body, html {
 
 
 .grey_font {
-    color: #848484; 
+    color: #222; 
+    position: relative;
+    cursor: pointer;
+    font-weight: bold;
 }
+/* .grey_font:hover{
+    color: white;
+} */
+.grey_font::after{
+    background-color: #D6223A;
+    transition: all ease-out 0.1s;
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    content: "";
+    color: white;
+    left: 0;
+    z-index: -1;
+    top: 0;
 
+}
+.grey_font:hover::after{
+    width: 100%;
+}
+.grey_font:hover{
+    color: white;
+}
 #dNZnPop4vEWlLc {
     font-size: 25px;
 }
 
 #pwsld {
-    padding: 10px;
-    padding-left: 20px;
+    padding: 20px;
     position: relative;
-    left: 4px;
+    font-weight: bold;
     top: 20px;
 }
 
@@ -204,8 +234,9 @@ tbody {
     bottom: 75%;
     /* display: none; */
     opacity: 0;
+
     transform: translateY(8px);
-    transition: all ease-in 0.1s;
+    transition: all ease-in 0.3s;
 }
 .copyBtnDiv p{
     box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
@@ -221,12 +252,80 @@ tbody {
 .generatedApiPart:hover{
     .copyBtnDiv{
         opacity: 1;
+        display: flex;
         transform: translateY(0px);
     }
 }
 .secKeyCreate button{
-    border: none;
     padding: 5%;
+    border-radius: 40px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e4e4e4;
     cursor: pointer;
+    position: relative;
     background-color: transparent;
+    z-index: 2;
+}
+
+.secKeyCreate{
+    position: relative;
+}
+.allBlur{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    backdrop-filter: blur(5px);
+    z-index: 1;
+}
+.spinnerPart{
+    left: 0;
+    z-index: 2;
+    position: absolute;
+    left: -12%;
+    /* top: revert-layer; */
+    bottom: -27%;
+    scale: 0.8;
+    z-index: 1;
+}
+
+#ifNoKey{
+    text-align: center;
+    /* width: 22%; */
+    width: 100%;
+    height: 50svh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+}
+
+#ifNoKey:hover{
+    #imageHoverNoKey{
+        opacity: 0.3;
+    }
+}
+#imageShowTableNoKey{
+    
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+#ifNoKey img{
+    width: 30%;
+}
+#ifNoKey p{
+    color: #333;
+    font-size: 2em;
+}
+#imageHoverNoKey{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-color: white;
+    opacity: 0.1;
 }

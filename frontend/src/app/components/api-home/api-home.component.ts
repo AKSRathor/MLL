@@ -1,7 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiKeys } from 'src/app/ApiKeys';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { KeypageService } from 'src/app/services/keypage/keypage.service';
+import { MenuItem, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-api-home',
@@ -9,38 +12,51 @@ import { ApiKeys } from 'src/app/ApiKeys';
   styleUrls: ['./api-home.component.css']
 })
 export class ApiHomeComponent implements OnInit {
-addKeyCard(keyCard: ApiKeys) {
+  onProgressSecKey: boolean = false;
+  visibleSidebar(boolVal: boolean) {
 
-  this.apiHome.unshift(keyCard)
-  
-}
-handleOnGenSecKey(keyVal: string) {
+    boolVal = true
 
-  const headers = new HttpHeaders({
-    'auth-token': this.tokeVal || '', // Ensure a default value if authtoken is null
-    'Content-Type': 'application/json' // 'content-type' changed to 'Content-Type'
-  });
-  const body =  {
-    passKey:keyVal
-  
   }
+  addKeyCard(keyCard: ApiKeys) {
 
-  this.http.put<any>('http://localhost:5000/aping/generateseckey',body, { headers }).subscribe({
+    this.apiHome.unshift(keyCard)
+
+  }
+  handleOnGenSecKey(keyVal: string) {
+    this.onProgressSecKey = true
+
+    const headers = new HttpHeaders({
+      'auth-token': this.tokeVal || '', // Ensure a default value if authtoken is null
+      'Content-Type': 'application/json' // 'content-type' changed to 'Content-Type'
+    });
+    const body = {
+      passKey: keyVal
+
+    }
+
+    this.http.put<any>('http://localhost:5000/aping/generateseckey', body, { headers }).subscribe({
       next: data => {
         console.log(data)
         navigator.clipboard.writeText(data.secKeyIs)
+        this.messageService.add({ severity: 'success', summary: 'Secret key copied', detail: "Check your clipboard" })
+        this.onProgressSecKey = false
+
       },
       error: error => {
         console.error("There is an error", error)
+        this.messageService.add({ severity: 'error', summary: 'Failed', detail: "Check your Server" })
       }
-  })
-  
-}
+    })
+
+  }
 
   apiHome: ApiKeys[] = [];
   tokeVal: string = `${localStorage.getItem("authtoken")}`;
-  
-  constructor(private http: HttpClient, private router: Router) {
+  items: MenuItem[] = [];
+
+
+  constructor(private http: HttpClient, private router: Router, public keypage: KeypageService, private messageService: MessageService) {
     const headers = new HttpHeaders({
       'auth-token': this.tokeVal || '', // Ensure a default value if authtoken is null
       'Content-Type': 'application/json' // 'content-type' changed to 'Content-Type'
@@ -49,7 +65,7 @@ handleOnGenSecKey(keyVal: string) {
 
     console.log(localStorage.getItem('authtoken'))
 
-    this.http.post<any>('http://localhost:5000/aping/fetchKeys',{}, { headers }).subscribe({
+    this.http.post<any>('http://localhost:5000/aping/fetchKeys', {}, { headers }).subscribe({
       next: data => {
         console.log(data)
 
@@ -57,7 +73,7 @@ handleOnGenSecKey(keyVal: string) {
         // this.apiHome.sort(function(a,b){
         //   return new Date(b.updatedAt) - new Date(a.updatedAt);
         // });
-        
+
       },
       error: error => {
         console.error("There is an error", error)
@@ -67,13 +83,62 @@ handleOnGenSecKey(keyVal: string) {
   }
 
 
-  handleOnCopyClick(keyVal:string) {
+  handleOnCopyClick(keyVal: string) {
+    this.messageService.add({ severity: 'success', summary: 'Passkey copied', detail: keyVal })
     navigator.clipboard.writeText(keyVal)
   }
 
   ngOnInit() {
 
+    this.items = [
+      {
+        label: 'Options',
+        items: [
+          {
+            label: 'Logout',
+            icon: 'pi pi-refresh',
+            command: () => {
+                this.handleOnLogout();
+            }
+          },
+          {
+            label: 'Dashboard',
+            icon: 'pi pi-times',
+            // command: () => {
+            //     this.delete();
+            // }
+          }
+        ]
+      },
+      // {
+      // label: 'Navigate',
+      // items: [
+      // {
+      //     label: 'Angular',
+      //     icon: 'pi pi-external-link',
+      //     url: 'http://angular.io'
+      // },
+      // {
+      //     label: 'Router',
+      //     icon: 'pi pi-upload',
+      //     routerLink: '/fileupload'
+      // }
+      // ]
+      // }
+    ];
+
+
+
   }
+  handleOnLogout(){
+    localStorage.removeItem("authtoken")
+    this.router.navigate(['login'])
+  }
+  handleOnCreate() {
+    this.keypage.createKeyBool = true
+  }
+
+
 
 
 

@@ -28,7 +28,9 @@
     
 }
 #sideBarContent{
-    width: 30%;
+    width: 100%;
+    background-color:white ;
+    z-index: 2;
 }
 .inputDivSidePara{
     padding-left: 15px;
@@ -64,6 +66,7 @@
     height: 100svh;
     padding: 2%;
     display: flex;
+    padding: 8%;
     flex-direction: column;
     gap: 25px;
     position: relative;

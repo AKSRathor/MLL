@@ -10,6 +10,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from "@angular/common/http"
 import { NgxUiLoaderModule, NgxUiLoaderConfig } from "ngx-ui-loader";
 import { SideBarComponent } from './components/api-home/side-bar/side-bar.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { KeypageService } from './services/keypage/keypage.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { ToastService } from './services/toast/toast.service';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ApiLogsComponent } from './components/api-logs/api-logs.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { MenuModule } from 'primeng/menu';
 
 
 
@@ -49,7 +58,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     LoginComponent,
     SignupComponent,
     ApiHomeComponent,
-    SideBarComponent
+    SideBarComponent,
+    ApiLogsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -57,9 +68,13 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    SidebarModule,
+    ToastModule,
+    ProgressSpinnerModule,
+    MenuModule
   ],
-  providers: [],
+  providers: [KeypageService, MessageService, ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
