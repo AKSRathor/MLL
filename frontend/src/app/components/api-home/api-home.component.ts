@@ -6,6 +6,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { KeypageService } from 'src/app/services/keypage/keypage.service';
 import { MenuItem, MessageService } from 'primeng/api';
 
+
 @Component({
   selector: 'app-api-home',
   templateUrl: './api-home.component.html',
@@ -110,21 +111,6 @@ export class ApiHomeComponent implements OnInit {
           }
         ]
       },
-      // {
-      // label: 'Navigate',
-      // items: [
-      // {
-      //     label: 'Angular',
-      //     icon: 'pi pi-external-link',
-      //     url: 'http://angular.io'
-      // },
-      // {
-      //     label: 'Router',
-      //     icon: 'pi pi-upload',
-      //     routerLink: '/fileupload'
-      // }
-      // ]
-      // }
     ];
 
 
@@ -136,6 +122,8 @@ export class ApiHomeComponent implements OnInit {
   }
   handleOnCreate() {
     this.keypage.createKeyBool = true
+    
+
   }
 
 

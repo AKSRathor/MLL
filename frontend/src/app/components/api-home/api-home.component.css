@@ -4,81 +4,13 @@ body, html {
     margin: 0;
 }
 
-#big_container {
-    display: flex;
-    height: 100%;
-}
-
-#left_container {
-    width: 20%;
-    background-color: #F9FAFB;
-    height: 100svh;
-    display: inline-block;
-    position: sticky;
-    left: 0;
-    display: flex;
-    top: 0;
-    flex-direction: column;
-    gap: 21px;
-}
-
-
-
-#mahindra_logo {
-    width: 80%;
-    padding: 4%;
-    padding-left: 6%;
-}
-
-
-.grey_font {
-    color: #222; 
-    position: relative;
-    cursor: pointer;
-    font-weight: bold;
-}
-/* .grey_font:hover{
-    color: white;
-} */
-.grey_font::after{
-    background-color: #D6223A;
-    transition: all ease-out 0.1s;
-    position: absolute;
-    width: 0%;
-    height: 100%;
-    content: "";
-    color: white;
-    left: 0;
-    z-index: -1;
-    top: 0;
-
-}
-.grey_font:hover::after{
-    width: 100%;
-}
-.grey_font:hover{
-    color: white;
-}
 #dNZnPop4vEWlLc {
     font-size: 25px;
 }
 
-#pwsld {
-    padding: 20px;
-    position: relative;
-    font-weight: bold;
-    top: 20px;
-}
 
 
-#MrKCgSxHMeTD2Rk {
-    padding: 20px;
-    /* list-style-image: url(./key.png) ; */
-}
 
-#cNKt81CvfXNk5Of {
-    padding: 20px;
-}
 
 
 /* li {
@@ -93,48 +25,7 @@ li::before {
   background-image: url(./key.png);
 } */
 
-#right_container {
-    padding: 20px;
-    width: 79%;
-    display: inline-block;
-    flex-direction: column;
-    background-color: #F3F3F4; /* Example background color */
-    overflow: auto;
-}
 
-#VYFc1qozkId5mra {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: center;
-}
-
-#toggle_menu_div {
-    width: 20%;
-
-}
-
-#toggle_menu {
-    background-color: transparent;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    width: 20%;
-}
-
-#person_id_profile {
-    /* display: inline-block;
-    position: relative;
-    right: 0px;
-    left: 50%; */
-
-    /* flex: 1 1 0; */
-
-    justify-content: right;
-  display: flex;
-  width: 80%;
-    
-}
 
 #diCgqRzdsILqdTa {
     width: 100%;

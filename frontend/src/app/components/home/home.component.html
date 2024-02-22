@@ -1,0 +1,24 @@
+<div id="big_container">
+    <div id="left_container">
+        <img id="mahindra_logo" src="https://companieslogo.com/img/orig/MAHLOG.NS_BIG-b9ce0293.png?t=1604232065"
+            alt="mahindta_logo">
+
+        <div id="pwsld" class="grey_font">Home</div>
+        <ul id="lcfLIlL20Uy2Jua">
+            <li id="MrKCgSxHMeTD2Rk" [style]="{display:'flex', gap:'10px',alignItems:'center' }" (click)="navigateCreateKeys()" class="grey_font"><i class="fa-solid fa-plus"></i> Create Keys </li>
+            <li id="cNKt81CvfXNk5Of" [style]="{display:'flex', gap:'10px',alignItems:'center' }" (click)="navigateViewLogs()" class="grey_font"><i class="fa-solid fa-clock-rotate-left"></i> View Logs </li>
+        </ul>
+    </div>
+    <div id="right_container">
+        <div id="VYFc1qozkId5mra">
+            <div id="toggle_menu_div">
+                <button id="toggle_menu"><i class="fa-solid fa-bars"></i></button>
+            </div>
+            <div id="person_id_profile">
+                <p-menu #menu [model]="items" [popup]="true"></p-menu>
+                <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars" label="Show">Personal Profile</button>
+            </div>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

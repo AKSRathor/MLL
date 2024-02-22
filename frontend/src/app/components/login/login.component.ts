@@ -36,7 +36,7 @@ export class LoginComponent {
         console.log(data)
         if(data.success){
           localStorage.setItem("authtoken", data.authtoken)
-          this.router.navigate(['home'])
+          this.router.navigate(['home/createkey'])
         }
       },
       error:error=>{

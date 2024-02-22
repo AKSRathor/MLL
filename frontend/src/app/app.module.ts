@@ -19,8 +19,12 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ApiLogsComponent } from './components/api-logs/api-logs.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MenuModule } from 'primeng/menu';
-
-
+import { HomeComponent } from './components/home/home.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { TableModule } from 'primeng/table';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   "bgsColor": "red",
@@ -60,7 +64,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     ApiHomeComponent,
     SideBarComponent,
     ApiLogsComponent,
-    ProfileComponent
+    ProfileComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,13 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     SidebarModule,
     ToastModule,
     ProgressSpinnerModule,
-    MenuModule
+    MenuModule,
+    InputTextModule,
+    CheckboxModule,
+    ButtonModule,
+    DialogModule,
+    TableModule
+    
   ],
   providers: [KeypageService, MessageService, ToastService],
   bootstrap: [AppComponent]

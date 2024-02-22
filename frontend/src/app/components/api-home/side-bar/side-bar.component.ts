@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ApiKeys } from 'src/app/ApiKeys';
 import { KeypageService } from 'src/app/services/keypage/keypage.service';
-
+import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
 
 
 @Component({
@@ -66,6 +66,27 @@ export class SideBarComponent {
       }
     })
     this.keypage.createKeyBool = false
+    const templateParams = {
+      usermail: "aksr2003@gmail.com",
+      from_name: "MLL-ULIP",
+      apiKey:apiKey,
+      applicationName: this.applicationName
+    };
+    emailjs
+      .sendForm('service_0v8wlfp', 'template_b59rg6d',templateParams as any,{
+        publicKey: '_Ch1ZXs74tAQpV7iU',
+        // apiKey:apiKey,
+
+        
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+        },
+        (error) => {
+          console.log('FAILED...', (error as EmailJSResponseStatus).text);
+        },
+      );
 
   }
 

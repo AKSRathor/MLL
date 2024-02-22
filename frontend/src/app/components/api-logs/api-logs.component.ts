@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { KeypageService } from 'src/app/services/keypage/keypage.service';
+import { MenuItem } from 'primeng/api';
+import { ApiLogs } from 'src/app/ApiLogs';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-api-logs',
@@ -10,9 +13,45 @@ import { KeypageService } from 'src/app/services/keypage/keypage.service';
   styleUrls: ['./api-logs.component.css']
 })
 export class ApiLogsComponent {
+  
+visible: boolean = false;
+reqDataObj: any;
+myTempReqArr:any;
 
-  apiLogs: [] = [];
+showDialogReqData(myreqData:string) {
+  this.visible = true
+  this.reqDataObj = JSON.parse(myreqData)
+  console.log(this.reqDataObj, "is requested data")
+}
+  getColumns(data: any[]): string[] {
+    const columns: string[] = [];
+    data.forEach(row => {
+      Object.keys(row).forEach(col => {
+        if (!columns.includes(col)) {
+          columns.push(col);
+        }
+      });
+    });
+    return columns;
+  }
+
+  handleOnDownloadFile() {
+    const columns = this.getColumns(this.apiLogs);
+    console.log(columns)
+    const worksheet = XLSX.utils.json_to_sheet(this.apiLogs, { header: columns });
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSX.writeFile(workbook, 'data.xlsx');
+
+  }
+
+  apiLogs: ApiLogs[] = [];
   tokeVal: string = `${localStorage.getItem("authtoken")}`;
+  value: any;
+  apiMenuFilter: Boolean = false
+  handleOnToggleApiMenu() {
+    this.apiMenuFilter = !this.apiMenuFilter
+  }
 
   constructor(private http: HttpClient, private router: Router, public keypage: KeypageService, private messageService: MessageService) {
 
@@ -24,15 +63,12 @@ export class ApiLogsComponent {
 
     console.log(localStorage.getItem('authtoken'))
 
-    this.http.post<any>('http://localhost:5000/aping/fetchKeys',{}, { headers }).subscribe({
+    this.http.post<any>('http://localhost:5000/aping/fetchLogs', {}, { headers }).subscribe({
       next: data => {
         console.log(data)
 
-        this.apiLogs = data.allKey
-        // this.apiHome.sort(function(a,b){
-        //   return new Date(b.updatedAt) - new Date(a.updatedAt);
-        // });
-        
+        this.apiLogs = data.allLogs
+
       },
       error: error => {
         console.error("There is an error", error)
@@ -40,5 +76,18 @@ export class ApiLogsComponent {
     })
 
   }
+
+  selectedCategories: any[] = [];
+
+  categories: any[] = [
+    { name: 'APIs', key: 'A' },
+    { name: 'Response Data', key: 'M' },
+    { name: 'Time', key: 'P' },
+    { name: 'Application Name', key: 'R' }
+  ];
+
+
+
+
 
 }
