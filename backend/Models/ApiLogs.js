@@ -22,6 +22,18 @@ module.exports = (Sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        applicationName:{
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        username:{
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        reqDataCode: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         
 
     });

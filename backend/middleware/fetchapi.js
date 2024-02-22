@@ -11,24 +11,33 @@ const fetchapi = async(req, res, next)=>{
 
     try {
         let myKey = await ApiKeys.findOne({ where: { key:apiKey } })
-        const dt = new Date()
+        req.applicationName = myKey.applicationName
         let mySecKey = myKey.secKey
         if(mySecKey != secKeyH){
-            console.log("sec key api ", mySecKey === secKeyH, dt.getDate()>myKey.secValidity.getDate(), dt.getDate(), "  ", myKey.secValidity.getDate())
+            // console.log("sec key api ", mySecKey === secKeyH, dt.getDate()>myKey.secValidity.getDate(), dt.getDate(), "  ", myKey.secValidity.getDate())
             res.send("Wrong API key entered")
         }
         else if(myKey.username === user){
-            console.log("second if")
-            const urlArray = req.url.split("/")
-            console.log(dt, urlArray)
-            const newApiLog = {
-                key:apiKey,
-                ulip: urlArray[3],
-                reqData: urlArray[4],
-                resData:"resData",
-                time:dt.getTime()
+            
+            const login_body = {
+                username:process.env.ulip_username,
+                password:process.env.ulip_password
             }
-            const apiLogIs = await ApiLogs.create(newApiLog)
+            console.log("login body is ", login_body)
+            
+            // const response = await fetch(process.env.ulip_login_url, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         'Accept': "application/json",
+    
+            //     },
+            //     body: JSON.stringify(login_body)
+            // })
+            // const resp_login = await response.json()
+            // req.authorization = await resp_login.response.id
+            // console.log(resp_login, "Is the response", req.authorization)
+            
             next()
         }
         else{
