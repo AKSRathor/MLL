@@ -25,17 +25,17 @@ const fetchapi = async(req, res, next)=>{
             }
             console.log("login body is ", login_body)
             
-            // const response = await fetch(process.env.ulip_login_url, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Accept': "application/json",
+            const response = await fetch(process.env.ulip_login_url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': "application/json",
     
-            //     },
-            //     body: JSON.stringify(login_body)
-            // })
-            // const resp_login = await response.json()
-            // req.authorization = await resp_login.response.id
+                },
+                body: JSON.stringify(login_body)
+            })
+            const resp_login = await response.json()
+            req.authorization = await resp_login.response.id
             // console.log(resp_login, "Is the response", req.authorization)
             
             next()

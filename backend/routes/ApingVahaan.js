@@ -108,23 +108,24 @@ router.post("/ulip/v1.0.0/:ulipIs/:reqIs", fetchuser, fetchapi, async (req, res)
         // console.log("the requested mware ", req.usn)
         // const reqAuthKey = req.header
         // console.log(JSON.stringify(req.body), req.header('Authorization'))
-        // const url = `${process.env.ulip_url}/${req.params.ulipIs}/${req.params.reqIs}`
-        const url = "http://localhost:3002/api/vahaan/ulip/v1.0.0/VAHAN/01"
+        const url = `${process.env.ulip_url}/${req.params.ulipIs}/${req.params.reqIs}`
+        // const url = "http://localhost:3002/api/vahaan/ulip/v1.0.0/VAHAN/01"
         console.log("Url is ", url)
         const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': "application/json",
-                // 'Authorization': `Bearer ${req.authorization}`,
+                'Authorization': `Bearer ${req.authorization}`,
                 // 'Authorization': req.header('Authorization'),
 
             },
             body: JSON.stringify(req.body)
         })
+        // console.log("all done", req.authorization)
         let json = await response.json()
+        // console.log(json, "is the response")
 
-        console.log("all done")
 
         if (req.params.ulipIs === "VAHAN") {
             
@@ -138,7 +139,6 @@ router.post("/ulip/v1.0.0/:ulipIs/:reqIs", fetchuser, fetchapi, async (req, res)
         }
         const urlArray = req.url.split("/")
         const dt = new Date()
-        console.log("If crossed ", JSON.stringify(json[0]))
         console.log(dt, urlArray)
         console.log(req.applicationName, "is ny key")
         const newApiLog = {
@@ -147,14 +147,13 @@ router.post("/ulip/v1.0.0/:ulipIs/:reqIs", fetchuser, fetchapi, async (req, res)
             reqDataCode: urlArray[4],
             resData: "JSON.stringify(json[0])",
             time: dt.getTime(),
-            applicationName: "req.applicationName",
+            applicationName: req.applicationName,
             username: req.usn,
             reqData: JSON.stringify(req.body)
 
         }
         console.log("logs sent")
         const apiLogIs = await ApiLogs.create(newApiLog)
-
 
         res.send({ success: true, json })
 
