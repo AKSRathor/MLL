@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiKeys } from 'src/app/ApiKeys';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { KeypageService } from 'src/app/services/keypage/keypage.service';
-import { MenuItem, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
@@ -54,7 +54,6 @@ export class ApiHomeComponent implements OnInit {
 
   apiHome: ApiKeys[] = [];
   tokeVal: string = `${localStorage.getItem("authtoken")}`;
-  items: MenuItem[] = [];
 
 
   constructor(private http: HttpClient, private router: Router, public keypage: KeypageService, private messageService: MessageService) {
@@ -90,28 +89,9 @@ export class ApiHomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.keypage.pageNav = 0
 
-    this.items = [
-      {
-        label: 'Options',
-        items: [
-          {
-            label: 'Logout',
-            icon: 'pi pi-refresh',
-            command: () => {
-                this.handleOnLogout();
-            }
-          },
-          {
-            label: 'Dashboard',
-            icon: 'pi pi-times',
-            // command: () => {
-            //     this.delete();
-            // }
-          }
-        ]
-      },
-    ];
+    
 
 
 

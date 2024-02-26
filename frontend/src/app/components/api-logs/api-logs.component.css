@@ -405,9 +405,10 @@ tbody {
     padding: 5%;
 }
 #downloadLogs{
-    position: absolute;
+    position: fixed;
     width: 11%;
     bottom: 5%;
+    z-index: 5;
     right: 3%;
     display: flex;
     flex-direction: column;
@@ -437,7 +438,7 @@ tbody {
     width: 100%;
     border-radius: 5px;
     transform: translateY(10px);
-    z-index: 0;
+    z-index: 2;
     opacity: 0;
     transition: all ease-in-out 0.3s;
 }

@@ -25,37 +25,43 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { WebsocketService } from './services/websocket/websocket.service';
 
-const ngxUiLoaderConfig: NgxUiLoaderConfig = {
-  "bgsColor": "red",
-  "bgsOpacity": 0.5,
-  "bgsPosition": "bottom-right",
-  "bgsSize": 60,
-  "bgsType": "ball-spin-clockwise",
-  "blur": 5,
-  "delay": 0,
-  "fastFadeOut": true,
-  "fgsColor": "#ffffff",
-  "fgsPosition": "center-center",
-  "fgsSize": 60,
-  "fgsType": "ball-spin-clockwise",
-  "gap": 24,
-  "logoPosition": "center-center",
-  "logoSize": 120,
-  "logoUrl": "",
-  "masterLoaderId": "master",
-  "overlayBorderRadius": "0",
-  "overlayColor": "rgba(40, 40, 40, 0.8)",
-  "pbColor": "red",
-  "pbDirection": "ltr",
-  "pbThickness": 3,
-  "hasProgressBar": false,
-  "text": "",
-  "textColor": "#FFFFFF",
-  "textPosition": "center-center",
-  "maxTime": -1,
-  "minTime": 300
-}
+// const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+//   "bgsColor": "red",
+//   "bgsOpacity": 0.5,
+//   "bgsPosition": "bottom-right",
+//   "bgsSize": 60,
+//   "bgsType": "ball-spin-clockwise",
+//   "blur": 5,
+//   "delay": 0,
+//   "fastFadeOut": true,
+//   "fgsColor": "#ffffff",
+//   "fgsPosition": "center-center",
+//   "fgsSize": 60,
+//   "fgsType": "ball-spin-clockwise",
+//   "gap": 24,
+//   "logoPosition": "center-center",
+//   "logoSize": 120,
+//   "logoUrl": "",
+//   "masterLoaderId": "master",
+//   "overlayBorderRadius": "0",
+//   "overlayColor": "rgba(40, 40, 40, 0.8)",
+//   "pbColor": "red",
+//   "pbDirection": "ltr",
+//   "pbThickness": 3,
+//   "hasProgressBar": false,
+//   "text": "",
+//   "textColor": "#FFFFFF",
+//   "textPosition": "center-center",
+//   "maxTime": -1,
+//   "minTime": 300
+// }
+
+const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,7 +79,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    // NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     SidebarModule,
     ToastModule,
     ProgressSpinnerModule,
@@ -82,10 +88,10 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     CheckboxModule,
     ButtonModule,
     DialogModule,
-    TableModule
-    
+    TableModule,
+    SocketIoModule.forRoot(config)
   ],
-  providers: [KeypageService, MessageService, ToastService],
+  providers: [KeypageService, MessageService, ToastService, WebsocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

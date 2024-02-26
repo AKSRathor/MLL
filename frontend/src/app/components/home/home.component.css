@@ -112,8 +112,27 @@
     justify-content: right;
     display: flex;
     width: 80%;
+    gap: 3px;
+    align-items: center;
 
 }
 .filterDiv{
     position: relative;
+}
+
+#menuProfileBtn{
+    background-image: url('https://i.pinimg.com/1200x/b1/88/c6/b188c6801ad1d71d3c962c6e4aa2d0cf.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 147%;
+    border: none;
+}
+.profileLabel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+.labelPrfName{
+    font-weight: bold;
 }

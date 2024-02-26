@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,7 +23,7 @@ import { Router } from '@angular/router';
   //   )
   // ]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   username: string = ""
   password: string = ""
   handleOnLogin() {
@@ -46,6 +46,11 @@ export class LoginComponent {
     
   }
   constructor(private http: HttpClient, private router:Router) { }
+  ngOnInit(): void {
+    if(localStorage.getItem("authtoken")){
+      this.router.navigate(['home/createkey'])
+    }
+  }
  
   
 

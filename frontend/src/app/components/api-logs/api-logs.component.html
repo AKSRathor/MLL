@@ -29,7 +29,7 @@
                     <h4 id="filterByH">Filter by</h4>
                     <div class="flex flex-column gap-2">
                         <div *ngFor="let category of categories" class="field-checkbox">
-                            <p-checkbox class="pCheckboxFilter" [label]="category.name" name="group" [value]="category"
+                            <p-checkbox [pSelectableRowDblClick]="" class="pCheckboxFilter" [label]="category.name" name="group" [value]="category"
                                 [(ngModel)]="selectedCategories"></p-checkbox>
                         </div>
                     </div>
@@ -58,23 +58,24 @@
                     <td>{{i.ulip}}</td>
                     <td>
                         <div class="card flex justify-content-center">
-                            <p-button [style]="{padding:'4%', display:'flex', gap:'10px', fontSize:'0.6em'}"
+                            <p-button [style]="{padding:'4%', display:'flex', gap:'10px', fontSize:'0.6em', backgroundColor:'#D6223A', border:'none', borderRadius:'5px'}"
                                 (click)="showDialogReqData(i.reqData)" icon="pi pi-external-link"
-                                label="Request data"></p-button>
+                                label="Request data">
+                            </p-button>
                             <p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '50vw',  }"
                                 [draggable]="false" [resizable]="false">
                                 <p class="m-0" [style]="{padding:'3%'}">
-                                    <p-table [value]="reqDataObj" [tableStyle]="{ 'min-width': '50rem' }">
+                                    <p-table [value]="reqDataObjArr" [tableStyle]="{ 'min-width': '50rem' }">
                                         <ng-template pTemplate="header">
                                             <tr>
                                                 <th>Data</th>
                                                 <th>Value</th>
                                             </tr>
                                         </ng-template>
-                                        <ng-template pTemplate="body" let-reqDataObj>
+                                        <ng-template pTemplate="body" let-reqDataObjArr>
                                             <tr>
-                                                <td>{{ reqDataObj.username }}</td>
-                                                <td>{{ reqDataObj.password }}</td>
+                                                <td>{{ reqDataObjArr.dt }}</td>
+                                                <td>{{ reqDataObjArr.vl }}</td>
                                             </tr>
                                         </ng-template>
                                     </p-table>
@@ -85,7 +86,10 @@
                     <td class="generatedApiPart">
                         {{i.time}}
                     </td>
-                    <td class="secKeyCreate">{{i.resData}} </td>
+                    <td class="secKeyCreate"><p-button [outlined]="true" [style]="{padding:'4%', display:'flex', gap:'10px', fontSize:'0.6em', border:'none', color:'#D6223A', borderRadius:'5px'}"
+                        (click)="showDialogReqData(i.reqData)" icon="pi pi-external-link"
+                        label="Response">
+                    </p-button> </td>
                 </tr>
             </tbody>
         </table>

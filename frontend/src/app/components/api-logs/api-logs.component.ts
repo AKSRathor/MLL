@@ -1,27 +1,55 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { KeypageService } from 'src/app/services/keypage/keypage.service';
 import { MenuItem } from 'primeng/api';
 import { ApiLogs } from 'src/app/ApiLogs';
 import * as XLSX from 'xlsx';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { Observable } from 'rxjs';
+import { WebsocketService } from 'src/app/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-api-logs',
   templateUrl: './api-logs.component.html',
   styleUrls: ['./api-logs.component.css']
 })
-export class ApiLogsComponent {
+export class ApiLogsComponent implements OnInit {
+
   
+
+  getApiLog(){
+    
+
+  }
+
 visible: boolean = false;
+// reqDataObjKey: any;
 reqDataObj: any;
+reqDataObjArr:{
+  dt:string,
+  vl:string
+}[]= [];
+
+
 myTempReqArr:any;
 
 showDialogReqData(myreqData:string) {
+  this.reqDataObjArr = []
   this.visible = true
   this.reqDataObj = JSON.parse(myreqData)
-  console.log(this.reqDataObj, "is requested data")
+  for (let i = 0; i < Object.keys(this.reqDataObj).length; i++) {
+    
+    let obj = {
+      dt: Object.keys(this.reqDataObj)[i],
+      vl: `${Object.values(this.reqDataObj)[i]}`,
+    }
+
+    this.reqDataObjArr.push(obj)
+  }
+  console.log(this.reqDataObjArr)
+  
 }
   getColumns(data: any[]): string[] {
     const columns: string[] = [];
@@ -53,7 +81,8 @@ showDialogReqData(myreqData:string) {
     this.apiMenuFilter = !this.apiMenuFilter
   }
 
-  constructor(private http: HttpClient, private router: Router, public keypage: KeypageService, private messageService: MessageService) {
+  constructor(private http: HttpClient, private router: Router, public keypage: KeypageService, private messageService: MessageService, public websocketservice: WebsocketService) {
+
 
     const headers = new HttpHeaders({
       'auth-token': this.tokeVal || '', // Ensure a default value if authtoken is null
@@ -86,6 +115,15 @@ showDialogReqData(myreqData:string) {
     { name: 'Application Name', key: 'R' }
   ];
 
+
+  ngOnInit() {
+    
+    this.keypage.pageNav = 1
+    this.websocketservice.listen("testevent").subscribe((data)=>{
+      console.log(data)
+    })
+
+  }
 
 
 

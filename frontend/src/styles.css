@@ -52,3 +52,23 @@
     gap: 7%;
     width: 100%;
 }
+
+
+
+.p-menu-list{
+    display: flex;
+    flex-direction: column;
+}
+.p-menu-list li{
+    height: 4vh;
+}
+.p-menu-list li div{
+    width: 100%;
+    padding: 2%;
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.p-menu-list li div a{
+    height: 100%;
+}

@@ -7,6 +7,8 @@ import { KeypageService } from 'src/app/services/keypage/keypage.service';
 import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
 
 
+
+
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
@@ -18,7 +20,7 @@ export class SideBarComponent {
   contactName: string = "";
   sidebarVisible2: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router, public keypage:KeypageService, private messageService: MessageService) { }
+  constructor(private http: HttpClient, private router: Router, public keypage: KeypageService, private messageService: MessageService) { }
   @Output() keyCardAdd: EventEmitter<ApiKeys> = new EventEmitter();
 
   generateApiKey(length: number = 32): string {
@@ -29,7 +31,7 @@ export class SideBarComponent {
     }
     return apiKey;
   }
-  handleOnClickMenu(){
+  handleOnClickMenu() {
     console.log("close clicked")
     this.keypage.createKeyBool = false
   }
@@ -37,56 +39,52 @@ export class SideBarComponent {
     const apiKey = self.crypto.randomUUID();
     const headers = new HttpHeaders({
       'auth-token': localStorage.getItem('authtoken') || '',
-      'Content-Type': 'application/json' 
+      'Content-Type': 'application/json'
     });
     this.http.post<any>('http://localhost:5000/aping/createkey', {
       "key": apiKey,
       "ownerName": this.ownerName,
       "contactNo": this.contactName,
       "applicationName": this.applicationName
-    }, {headers}).subscribe({
+    }, { headers }).subscribe({
       next: data => {
         // console.log(data)
         const todoCard = {
-          key:apiKey,
-          ownerName:this.ownerName,
-          contactNo:this.contactName,
-          applicationName:this.applicationName,
-          secKey:"",
-          updatedAt:""
-          
+          key: apiKey,
+          ownerName: this.ownerName,
+          contactNo: this.contactName,
+          applicationName: this.applicationName,
+          secKey: "",
+          updatedAt: ""
+
         }
-        this.messageService.add({ severity: 'success', summary: 'Key Created', detail:apiKey  })
+        this.messageService.add({ severity: 'success', summary: 'Key Created', detail: apiKey })
         this.keyCardAdd.emit(todoCard)
-        
+
       },
       error: error => {
         console.error("There is an error", error)
-        this.messageService.add({ severity: 'error', summary: 'Failed', detail:"Please check your server"  })
+        this.messageService.add({ severity: 'error', summary: 'Failed', detail: "Please check your server" })
       }
     })
     this.keypage.createKeyBool = false
-    const templateParams = {
-      usermail: "aksr2003@gmail.com",
-      from_name: "MLL-ULIP",
-      apiKey:apiKey,
-      applicationName: this.applicationName
-    };
-    emailjs
-      .sendForm('service_0v8wlfp', 'template_b59rg6d',templateParams as any,{
-        publicKey: '_Ch1ZXs74tAQpV7iU',
-        // apiKey:apiKey,
+    // const templateParams = {
+    //   usermail: "aksr2003@gmail.com",
+    //   from_name: "MLL-ULIP",
+    //   apiKey:apiKey,
+    //   applicationName: this.applicationName,
+    //   ownerName:this.ownerName
+    // };
+    emailjs.init("QuMxBAxGcl10ggVaf")
+    emailjs.send('service_3ekbj9u', 'template_617bkto',{
+        usermail: "aksr2003@gmail.com",
+        from_name: "MLL-ULIP",
+        apiKey: apiKey,
+        applicationName: this.applicationName,
+        ownerName: this.ownerName
 
-        
+
       })
-      .then(
-        () => {
-          console.log('SUCCESS!');
-        },
-        (error) => {
-          console.log('FAILED...', (error as EmailJSResponseStatus).text);
-        },
-      );
 
   }
 

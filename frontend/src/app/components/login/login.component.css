@@ -14,7 +14,7 @@
 .login-container {
     width: 32%;
     padding: 20px;
-    height: 75%;
+    height: 80%;
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -51,7 +51,6 @@
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
 }
@@ -143,6 +142,7 @@ img {
     /* Set hyperlink color to red */
 
     display: block;
+    padding: 2% 0;
     text-align: right;
 }
 
@@ -150,7 +150,7 @@ img {
     color: blue;
     text-align: right;
     display: flex;
-    color: blue;
+    padding: 5% 0;
     text-align: right;
     gap: 7px;
     justify-content: right;
